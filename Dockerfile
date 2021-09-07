@@ -37,6 +37,7 @@ FROM jupyter/base-notebook:latest
 USER root
 RUN apt-get update && \
     apt-get install -y autoconf automake build-essential git libncurses5 libtool make pkg-config tcsh vim zlib1g-dev && \
+    apt-get install -y texlive-xetex texlive-fonts-recommended texlive-latex-recommended && \
     wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz && \
     tar xvf  libpng_1.2.54.orig.tar.xz && \
     cd libpng-1.2.54 && \
