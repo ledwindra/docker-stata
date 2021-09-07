@@ -1,9 +1,13 @@
 # initial setup
 FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y wget
 
 # you need to have a stata installer named stata.tar.gz on your machine
-COPY stata.tar.gz /home/stata.tar.gz
+ARG URL
+ENV URL=${URL}
+# COPY stata.tar.gz /home/stata.tar.gz
+RUN wget -O /home/stata.tar.gz ${URL}
 
 # passing environment variables to input stata prompts
 ARG SERIAL
