@@ -2,6 +2,7 @@
 
 ```bash
 # replace all values 
+# only executed once
 docker build -t stata "https://github.com/ledwindra/docker-stata.git#main" \
     --build-arg URL="URL TO YOUR STATA INSTALLER" \
     --build-arg SERIAL="STATA SERIAL NUMBER" \
@@ -11,7 +12,13 @@ docker build -t stata "https://github.com/ledwindra/docker-stata.git#main" \
     --build-arg LAST="LAST NAME"
     
 # run jupyter and copy tokens if needed
+# unless you delete the container (stata), you only need to execute the following command
 docker run -p 8888:8888 --name=stata stata:latest
+
+# check whether stata container is active
+docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+2d70f687536f   stata:latest   "tini -g -- jupyter …"   4 minutes ago   Up 4 minutes   0.0.0.0:8888->8888/tcp, :::8888->8888/tcp   stata
 ```
 
 # Token
