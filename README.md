@@ -8,7 +8,7 @@ There are two images, one only consists of Stata, the other one has Jupyter and 
 # only Stata—1.29 GB
 docker pull ledwindra/base-stata:latest
 
-# with Jupyter and LaTeX— GB
+# with Jupyter and LaTeX—960 MB
 docker pull ledwindra/jupyter-stata:latest
 ```
 
