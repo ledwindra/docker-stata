@@ -23,8 +23,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
+
       - name: Build and push base-stata
+        uses: actions/checkout@v2
         env:
           # environment variables
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
