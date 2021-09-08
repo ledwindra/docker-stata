@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Jupyter Stata
+name: CI Docker Stata
 
 # Controls when the workflow will run
 on:
@@ -23,9 +23,25 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Build and push Docker image
+
+      - name: Build and push base-stata
+        uses: actions/checkout@v2
+        env:
+          # environment variables
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          URL: ${{ secrets.URL }}
+        run: |
+          cd ./base-stata
+          wget -q -O stata.tar.gz ${URL}
+          echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+          docker build -t base-stata .
+          docker tag base-stata:latest ledwindra/base-stata:latest
+          docker push ledwindra/base-stata:latest
+
+
+      - name: Build and push jupyter-stata
+        uses: actions/checkout@v2
         env:
           # environment variables
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
