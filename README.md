@@ -1,3 +1,6 @@
+[![Base Stata](https://github.com/ledwindra/docker-stata/actions/workflows/base-stata.yml/badge.svg)](https://github.com/ledwindra/docker-stata/actions/workflows/base-stata.yml)
+[![Jupyter Stata](https://github.com/ledwindra/docker-stata/actions/workflows/jupyter-stata.yml/badge.svg)](https://github.com/ledwindra/jupyter-stata/actions/workflows/jupyter-stata.yml)
+
 # ⚠️ Disclaimer
 This is an unofficial repository to run Stata using Docker. You must have the license code. Otherwise, you can't execute Stata both on batch mode or via Jupyter because the `stata.lic` file is not attached in the Docker images.
 

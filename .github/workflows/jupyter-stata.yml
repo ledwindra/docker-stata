@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Base Stata
+name: Jupyter Stata
 
 # Controls when the workflow will run
 on:
@@ -32,9 +32,9 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           URL: ${{ secrets.URL }}
         run: |
-          cd ./base-stata
+          cd ./jupyter-stata
           wget -q -O stata.tar.gz ${URL}
           echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-          docker build -t base-stata .
-          docker tag base-stata:latest ledwindra/base-stata:latest
-          docker push ledwindra/base-stata:latest
+          docker build -t jupyter-stata .
+          docker tag jupyter-stata:latest ledwindra/jupyter-stata:latest
+          docker push ledwindra/jupyter-stata:latest
