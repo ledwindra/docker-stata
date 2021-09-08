@@ -12,7 +12,8 @@ RUN cd /tmp/ && \
     cd /usr/local && \
     mkdir -p stata && \
     cd stata && \
-    yes | /tmp/statafiles/install
+    yes | /tmp/statafiles/install && \
+    rm -rf /home/stata.tar.gz
 
 RUN apt-get update && \
     apt-get install -y autoconf automake build-essential git libncurses5 libtool make pkg-config tcsh vim zlib1g-dev && \
