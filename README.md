@@ -1,39 +1,16 @@
-# Usage
+# ⚠️ Disclaimer
+This is an unofficial repository to run Stata using Docker. You must have the license code. Otherwise, you can't execute Stata both on batch mode or via Jupyter because the `stata.lic` file is not attached in the Docker images.
+
+# Images
+There are two images, one only consists of Stata, the other one has Jupyter and LaTeX installed. To see my Docker repositories, visit [here](https://hub.docker.com/u/ledwindra). Use the following Docker commands to pull the images:
 
 ```bash
-# replace all values 
-# only executed once
-docker build -t stata "https://github.com/ledwindra/docker-stata.git#main" \
-    --build-arg URL="URL TO YOUR STATA INSTALLER" \
-    --build-arg SERIAL="STATA SERIAL NUMBER" \
-    --build-arg CODE="STATA CODE" \
-    --build-arg AUTHORIZATION="STATA AUTHORIZATION" \
-    --build-arg FIRST="FIRST NAME" \
-    --build-arg LAST="LAST NAME"
-    
-# run jupyter and copy tokens if needed
-# unless you delete the container (stata), you only need to execute the following command
-docker run -p 8888:8888 --name=stata stata:latest
+# only Stata—1.29 GB
+docker pull ledwindra/base-stata:latest
 
-# check whether stata container is active
-docker ps -a
-CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-2d70f687536f   stata:latest   "tini -g -- jupyter …"   4 minutes ago   Up 4 minutes   0.0.0.0:8888->8888/tcp, :::8888->8888/tcp   stata
+# with Jupyter and LaTeX— GB
+docker pull ledwindra/jupyter-stata:latest
 ```
 
-# Token
-<img width="1145" alt="image" src="https://user-images.githubusercontent.com/39021609/132377383-e9994b5b-6fd4-41d7-ba2a-74c73215f059.png">
-
-# Change configuration file
-By default, `stata_kernel` assumes your Stata is MP edition. You need to change its configuration file if you have another edition (IC or SE) by using terminal inside Jupyter. Then type `vim ~/.stata_kernel.conf`.
-
-<img width="358" alt="image" src="https://user-images.githubusercontent.com/39021609/132377661-17dd1788-f95f-4484-984b-3d6a87b40b31.png">
-
-Change `stata_path = /usr/local/stata/stata-mp` to be `/usr/local/stata/` (IC) or `/usr/local/stata/stata-se` (SE).
-
-<img width="759" alt="image" src="https://user-images.githubusercontent.com/39021609/132377882-75439f10-3a58-43ce-aea6-2a4b4873a4ff.png">
-
-
-
-
-
+# Too lazy to install Docker?
+No worries, you can execute this via [GitHub Codespaces](https://docs.github.com/en/codespaces/overview) for both public and private repositories. Its default setup has Docker installed. Understanding Docker commands may be helpful, though you can just copy and paste my snippets above.

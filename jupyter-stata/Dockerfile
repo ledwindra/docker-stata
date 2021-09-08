@@ -1,28 +1,10 @@
 # initial setup
-FROM ubuntu:latest
+FROM ubuntu:latest AS stata
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y wget
 
-# you need to have a stata installer named stata.tar.gz on your machine
-# URL can be from Dropbox
-ARG URL
-ENV URL=${URL}
-RUN wget -O /home/stata.tar.gz ${URL}
-
-# passing environment variables to input stata prompts
-ARG SERIAL
-ARG CODE
-ARG AUTHORIZATION
-ARG FIRST
-ARG LAST
-
-ENV SERIAL=${SERIAL}
-ENV CODE=${CODE}
-ENV AUTHORIZATION=${AUTHORIZATION}
-ENV FIRST=${FIRST}
-ENV LAST=${LAST}
-
 # install stata
+COPY stata.tar.gz /home/stata.tar.gz
 RUN cd /tmp/ && \
     mkdir -p statafiles && \
     cd statafiles && \
@@ -30,8 +12,7 @@ RUN cd /tmp/ && \
     cd /usr/local && \
     mkdir -p stata && \
     cd stata && \
-    yes | /tmp/statafiles/install && \
-    echo "Y\nY\n${SERIAL}\n${CODE}\n${AUTHORIZATION}\nY\nY\n${FIRST}\n${LAST}\nY" | ./stinit
+    yes | /tmp/statafiles/install
 
 # setup stata kernel
 FROM jupyter/base-notebook:latest
@@ -47,7 +28,7 @@ RUN apt-get update && \
     make install && \
     ldconfig
 RUN apt-get install -y texlive-xetex texlive-fonts-recommended texlive-latex-recommended
-COPY --from=0 /usr/local/stata /usr/local/stata
+COPY --from=stata /usr/local/stata /usr/local/stata
 ENV PATH="/usr/local/stata:$PATH"
 RUN pip install stata_kernel && python -m stata_kernel.install
 RUN chmod +x ~/.stata_kernel.conf    
