@@ -1,7 +1,3 @@
-[![docker pulls](https://img.shields.io/docker/pulls/ledwindra/jupyter-stata.svg)
-[![docker stars](https://img.shields.io/docker/stars/ledwindra/jupyter-stata.svg)
-[![image size](https://img.shields.io/docker/image-size/ledwindra/jupyter-stata.svg)
-
 # Usage
 
 You can build the image locally on your own. First, you must have Stata installer in `.tar.gz` format and save it in this directory `(./jupyter-stata/)`
@@ -14,11 +10,8 @@ docker build -t jupyter-stata .
 # after running this command, copy and paste the notebook token
 docker run -p 8888:8888 --name=jupyter-stata jupyter-stata:latest
 
-# stop container
-docker stop jupyter-stata
-
 # remove container if no longer needed
-docker rm jupyter-stata
+docker rm -f jupyter-stata
 ```
 
 To run Stata, you need to create `stata.lic` file inside `/usr/local/stata/` directory. Otherwise, you will get the following error message when you prompt Stata batch mode:

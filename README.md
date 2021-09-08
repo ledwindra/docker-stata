@@ -5,10 +5,10 @@ This is an unofficial repository to run Stata using Docker. You must have the li
 There are two images, one only consists of Stata, the other one has Jupyter and LaTeX installed. To see my Docker repositories, visit [here](https://hub.docker.com/u/ledwindra). Use the following Docker commands to pull the images:
 
 ```bash
-# only Stata
+# only Stata—1.29 GB
 docker pull ledwindra/base-stata:latest
 
-# with Jupyter and LaTeX
+# with Jupyter and LaTeX—960 MB
 docker pull ledwindra/jupyter-stata:latest
 ```
 
