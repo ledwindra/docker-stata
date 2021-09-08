@@ -35,5 +35,5 @@ jobs:
           wget -O stata.tar.gz ${URL}
           echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
           docker build -t base-stata .
-          docker tag stata:latest ledwindra/stata:latest
-          docker push ledwindra/stata:latest
+          docker tag base-stata:latest ledwindra/base-stata:latest
+          docker push ledwindra/base-stata:latest
