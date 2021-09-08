@@ -6,8 +6,11 @@
 name: base-stata
 
 on:
-  release:
-    types: [published]
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
 
 jobs:
   push_to_registry:
